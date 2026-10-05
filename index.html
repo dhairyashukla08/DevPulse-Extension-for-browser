@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevPulse — Developer Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Header Section -->
+    <header class="header">
+      <div class="brand">
+        <h1 class="brand-title">⚡ DevPulse</h1>
+        <span class="cmd-badge">Press <kbd>⌘K</kbd> / <kbd>Ctrl+K</kbd></span>
+      </div>
+
+      <!-- Live Clock & Focus Pomodoro Timer -->
+      <div class="header-center">
+        <div class="pomo-widget">
+          <button id="pomo-toggle-btn" title="Start Focus Timer">⏱️ <span id="pomo-display">25:00</span></button>
+        </div>
+        <div class="clock-section">
+          <div id="clock">00:00</div>
+          <div id="date">...</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button id="tools-btn" class="quick-link">🛠️ Dev Tools</button>
+        <button id="config-btn" class="quick-link">⚙️ Profile</button>
+      </div>
+    </header>
+
+    <!-- Interactive Quick Access Bar -->
+    <nav class="quick-bar">
+      <div class="quick-links-group" id="bookmarks-container">
+        <a href="https://github.com" id="user-gh-link" target="_blank" class="quick-link">🐙 GitHub</a>
+        <a href="https://news.ycombinator.com" target="_blank" class="quick-link">🔥 HackerNews</a>
+        <a href="https://dev.to" target="_blank" class="quick-link">👩‍💻 DEV</a>
+        <a href="https://stackoverflow.com" target="_blank" class="quick-link">💬 StackOverflow</a>
+        <a href="http://localhost:3000" target="_blank" class="quick-link local-link">⚡ Local:3000</a>
+      </div>
+    </nav>
+
+    <!-- Main Dashboard Grid -->
+    <main class="dashboard-grid">
+      
+      <!-- Column 1: Profile Overview, Scratchpad, & Public Activity -->
+      <div class="grid-column">
+        <section class="glass-card">
+          <div class="card-header">
+            <h2>👤 GitHub Overview</h2>
+          </div>
+          <div id="profile-container" class="card-body">
+            <div class="empty-state">Click ⚙️ Profile at top to enter your GitHub username.</div>
+          </div>
+        </section>
+
+        <!-- Developer Local Scratchpad -->
+        <section class="glass-card flex-grow">
+          <div class="card-header">
+            <h2>📝 Local Scratchpad</h2>
+            <span class="muted-text">Auto-saved</span>
+          </div>
+          <div class="card-body pad-0">
+            <textarea id="scratchpad-input" placeholder="// Dump API responses, environment variables, terminal snippets, or quick TODOs..." spellcheck="false"></textarea>
+          </div>
+        </section>
+
+        <!-- Recent Activity Log -->
+        <section class="glass-card">
+          <div class="card-header">
+            <h2>⚡ Public Commit Log</h2>
+          </div>
+          <div id="activity-container" class="card-body">
+            <div class="empty-state">No activity loaded.</div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Column 2: Trending Repositories & Cloud Services Status -->
+      <div class="grid-column">
+        <section class="glass-card flex-grow">
+          <div class="card-header">
+            <h2>🔥 Trending Repos</h2>
+            <select id="lang-select" class="glass-select">
+              <option value="javascript">JavaScript</option>
+              <option value="typescript">TypeScript</option>
+              <option value="kotlin">Kotlin</option>
+              <option value="python">Python</option>
+              <option value="go">Go</option>
+              <option value="rust">Rust</option>
+              <option value="">All Languages</option>
+            </select>
+          </div>
+          <div id="repos-container" class="card-body"></div>
+        </section>
+
+        <!-- Platform Status Monitor -->
+        <section class="glass-card">
+          <div class="card-header">
+            <h2>📡 Cloud Services Status</h2>
+          </div>
+          <div id="status-container" class="status-grid">
+            <div class="status-item"><span class="dot green"></span> GitHub</div>
+            <div class="status-item"><span class="dot green"></span> AWS</div>
+            <div class="status-item"><span class="dot green"></span> Vercel</div>
+            <div class="status-item"><span class="dot green"></span> Cloudflare</div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Column 3: Hacker News Feed -->
+      <div class="grid-column">
+        <section class="glass-card flex-grow">
+          <div class="card-header">
+            <h2>📰 Hacker News Feed</h2>
+            <button id="refresh-news" class="icon-btn">↻</button>
+          </div>
+          <div id="news-container" class="card-body"></div>
+        </section>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <button id="default-newtab-btn" class="exit-btn">Exit to Default New Tab Page</button>
+      <p>Built with ❤️ by <strong>Dhairya Shukla</strong> • <a href="https://github.com" target="_blank">Contribute on GitHub</a></p>
+    </footer>
+
+  </div>
+
+  <!-- Command Palette Modal (Cmd+K / Ctrl+K) -->
+  <div id="cmd-palette" class="modal-overlay hidden">
+    <div class="cmd-box">
+      <input type="text" id="cmd-input" placeholder="Type a command (e.g., 'tools', 'profile', 'scratchpad')...">
+      <div id="cmd-results" class="cmd-list">
+        <div class="cmd-item" data-action="tools">🛠️ Open Dev Toolbox (JSON / Base64 / Epoch)</div>
+        <div class="cmd-item" data-action="profile">⚙️ Configure GitHub Profile</div>
+        <div class="cmd-item" data-action="scratchpad">📝 Focus Scratchpad</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Developer Quick-Tools Modal Drawer -->
+  <div id="tools-modal" class="modal-overlay hidden">
+    <div class="glass-modal width-large">
+      <div class="modal-header">
+        <h3>🛠️ Developer Toolbox</h3>
+        <button id="close-tools-btn" class="close-modal-btn">&times;</button>
+      </div>
+      <div class="tools-tab-bar">
+        <button class="tab-btn active" data-tab="tab-json">JSON Formatter</button>
+        <button class="tab-btn" data-tab="tab-base64">Base64 Decoder</button>
+        <button class="tab-btn" data-tab="tab-unix">Epoch Time</button>
+      </div>
+      <div class="modal-body">
+        <div id="tab-json" class="tab-content active">
+          <textarea id="json-input" class="code-area" placeholder="Paste dirty JSON here..."></textarea>
+          <div class="tool-actions">
+            <button id="format-json-btn" class="quick-link primary-link">Format JSON</button>
+            <button id="clear-json-btn" class="quick-link">Clear</button>
+          </div>
+        </div>
+        <div id="tab-base64" class="tab-content hidden">
+          <textarea id="b64-input" class="code-area" placeholder="Enter Base64 string..."></textarea>
+          <pre id="b64-output" class="code-preview">// Decoded output will appear here...</pre>
+          <div class="tool-actions">
+            <button id="decode-b64-btn" class="quick-link primary-link">Decode</button>
+          </div>
+        </div>
+        <div id="tab-unix" class="tab-content hidden">
+          <p>Current Unix Epoch Timestamp: <strong id="current-epoch">0000000000</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GitHub Settings Modal -->
+  <div id="token-modal" class="modal-overlay hidden">
+    <div class="glass-modal">
+      <div class="modal-header">
+        <h3>GitHub Configuration</h3>
+        <button id="close-modal-btn" class="close-modal-btn">&times;</button>
+      </div>
+      <p class="muted-text">Enter your GitHub username or profile link below.</p>
+      <input type="text" id="gh-user-input" placeholder="https://github.com/dhairyashukla or dhairyashukla">
+      <div class="modal-footer">
+        <button id="save-settings-btn" class="primary-btn">Save Profile</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
