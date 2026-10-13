@@ -15,7 +15,7 @@
     "https://hacker-news.firebaseio.com/*"
   ],
   "icons": {
-    "16": "icons/icon16.png",
+    "16": "icons/icons16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   }
