@@ -1,18 +1,21 @@
 {
   "manifest_version": 3,
-  "name": "DevPulse – Modern Developer Dashboard",
-  "version": "2.0.0",
-  "description": "Minimalist developer dashboard replacing your New Tab page with GitHub activity and Tech News.",
+  "name": "DevPulse – Noir Developer Dashboard",
+  "version": "3.0.0",
+  "description": "A noir-styled developer new tab: case files, stakeout timer, GitHub intel, tech news, status board and a pocket toolbox.",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
   "permissions": [
-    "storage",
-    "tabs"
+    "storage"
   ],
   "host_permissions": [
     "https://api.github.com/*",
-    "https://hacker-news.firebaseio.com/*"
+    "https://hacker-news.firebaseio.com/*",
+    "https://www.githubstatus.com/*",
+    "https://www.vercel-status.com/*",
+    "https://www.cloudflarestatus.com/*",
+    "https://discordstatus.com/*"
   ],
   "icons": {
     "16": "icons/icons16.png",
