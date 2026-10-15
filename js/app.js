@@ -78,11 +78,12 @@ const Rain = (() => {
   });
   const resize = () => {
     c.width = innerWidth; c.height = innerHeight;
-    drops = Array.from({ length: Math.floor(innerWidth / 9) }, () => spawn(true));
+    drops = Array.from({ length: Math.floor(innerWidth / 7) }, () => spawn(true));
   };
   const frame = () => {
     ctx.clearRect(0, 0, c.width, c.height);
-    ctx.strokeStyle = 'rgba(190,200,215,.2)';
+    ctx.strokeStyle = 'rgba(205,220,240,.5)';
+    ctx.lineWidth = 1.3;
     ctx.beginPath();
     for (const d of drops) {
       ctx.moveTo(d.x, d.y); ctx.lineTo(d.x - d.l * 0.18, d.y + d.l);
