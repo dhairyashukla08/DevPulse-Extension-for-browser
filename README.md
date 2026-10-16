@@ -79,7 +79,7 @@ DevPulse is not on the Chrome Web Store, so you load it as an unpacked extension
 
 1. Clone or download this repository.
    ```bash
-   git clone https://github.com/<your-username>/devpulse-extension.git
+   git clone https://github.com/dhairyashukla08/DevPulse-Extension-for-browser.git
    ```
 2. Open `chrome://extensions` in Chrome (or any Chromium browser).
 3. Turn on **Developer mode** (top right).
