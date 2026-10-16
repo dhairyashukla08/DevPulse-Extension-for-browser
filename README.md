@@ -1,12 +1,26 @@
 # DevPulse
 
-**A noir-styled developer dashboard that replaces your Chrome new tab.**
+**A noir-styled developer dashboard for your new tab — case files, a stakeout focus timer, GitHub intel, tech news, service status and a pocket dev toolbox, all in one dark, atmospheric command center.**
+
+🔗 **[Try the live demo](https://devpulse-extension-noir.netlify.app)** — runs entirely in your browser, no install needed.
+📥 **[Install it as your real new tab](#installation)** — free, 2-minute setup, no Chrome Web Store required.
 
 DevPulse turns every new tab into a dark, atmospheric command center: a focus timer, a task list, GitHub activity, tech news, service status and a pocket toolbox, all behind a film-noir interface with venetian-blind light, rain and film grain.
 
 Built with plain HTML, CSS and JavaScript (Manifest V3). No frameworks, no build step, no tracking.
 
 <!-- Add a screenshot here: ![DevPulse screenshot](docs/screenshot.png) -->
+
+---
+
+## Live demo vs. the real extension
+
+The live demo is the exact same code, running as an ordinary website instead of an installed extension — a quick way to see and try everything before committing to an install. Two things work differently there:
+
+- It can't actually become your new tab page. Only a real installed extension can override that; a website never can.
+- A couple of the live sections (GitHub activity, trending repos, Hacker News, service status) depend on the target API allowing cross-origin requests from a plain webpage. The real extension's `host_permissions` bypass this entirely, so those sections are guaranteed to work once installed, even on the rare chance one of them doesn't load on the demo.
+
+Everything else — the timer, tasks, scratchpad, command palette, toolbox and atmosphere effects — behaves identically in both.
 
 ---
 
@@ -61,7 +75,7 @@ Venetian blind light, rain, film grain and an optional cursor flashlight, each o
 
 ## Installation
 
-DevPulse is not on the Chrome Web Store, so you load it as an unpacked extension:
+DevPulse is not on the Chrome Web Store, so you load it as an unpacked extension — this is a completely normal, free part of Chrome's developer tools, not a workaround:
 
 1. Clone or download this repository.
    ```bash
@@ -71,6 +85,8 @@ DevPulse is not on the Chrome Web Store, so you load it as an unpacked extension
 3. Turn on **Developer mode** (top right).
 4. Click **Load unpacked** and select the project folder.
 5. Open a new tab.
+
+Chrome may show an "unpacked extensions" warning banner the first few times you open the browser. This is normal for any extension loaded this way and not a sign anything is wrong — it's Chrome letting you know the extension didn't come from the Web Store.
 
 Click the gear icon (**Settings**) to add your name, your GitHub username, your accent color and your timer lengths.
 
